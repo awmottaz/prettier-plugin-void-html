@@ -28,6 +28,7 @@
   "files": [],
   "type": "module",
   "main": "prettier-plugin-void-html.js",
+  "exports": "./prettier-plugin-void-html.js",
   "scripts": {
     "test": "node --test test.js",
     "test:watch": "node --test --watch test.js",
