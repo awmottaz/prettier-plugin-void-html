@@ -43,5 +43,8 @@
   },
   "np": {
     "yarn": false
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
