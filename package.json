@@ -1,6 +1,6 @@
 {
   "name": "@awmottaz/prettier-plugin-void-html",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Prettier plugin to print void HTML elements without self-closing syntax",
   "author": {
     "email": "mail@tonymottaz.com",
@@ -22,12 +22,17 @@
     "html",
     "void"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [],
   "type": "module",
   "main": "prettier-plugin-void-html.js",
   "scripts": {
     "test": "node --test test.js",
     "test:watch": "node --test --watch test.js",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm test",
+    "release": "np"
   },
   "devDependencies": {
     "np": "^8.0.4",
@@ -35,5 +40,8 @@
   },
   "peerDependencies": {
     "prettier": "^3.0.3"
+  },
+  "np": {
+    "yarn": false
   }
 }
