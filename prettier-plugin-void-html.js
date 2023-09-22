@@ -24,13 +24,15 @@ export const printers = {
     print(path, options, print) {
       const { node } = path;
 
+      // Self-closing syntax is allowed in SVG and MathML.
+      if (!["svg", "math"].includes(node.namespace)) {
+        node.isSelfClosing = false;
+      }
+
       if (!node?.tagDefinition?.isVoid) {
         // Not a void tag, use the default printer.
         return prettierParserHtml.printers.html.print(path, options, print);
       }
-
-      // Modify the node to disable self-closing syntax
-      node.isSelfClosing = false;
 
       // Then pass it along to the default printer. Since it is no
       // longer marked as self-closing, the printer will give it a
