@@ -6,6 +6,7 @@ export const languages = [
     name: "HTML5",
     extensions: [".html"],
     parsers: ["html"],
+    vscodeLanguageIds: ["html"],
   },
 ];
 
