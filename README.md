@@ -4,22 +4,20 @@ This is a [Prettier plugin](https://prettier.io/docs/en/plugins) to format [void
 
 ## Usage
 
-Install this package from NPM using:
+Install this package from NPM using your favorite package manager:
 
-`npm`
-```sh
-npm install -D @awmottaz/prettier-plugin-void-html
-```
-
-`yarn`
-```sh
-yarn add -D @awmottaz/prettier-plugin-void-html
-```
-
-or `pnpm`
-```sh
-pnpm add -D @awmottaz/prettier-plugin-void-html
-```
+- [`npm`](https://docs.npmjs.com/cli/v10/configuring-npm/install)
+  ```sh
+  npm install -D @awmottaz/prettier-plugin-void-html
+  ```
+- [`yarn`](https://yarnpkg.com/getting-started/install)
+  ```sh
+  yarn add -D @awmottaz/prettier-plugin-void-html
+  ```
+- [`pnpm`](https://pnpm.io/installation)
+  ```sh
+  pnpm add -D @awmottaz/prettier-plugin-void-html
+  ```
 
 Add the plugin to your [Prettier config file](https://prettier.io/docs/en/configuration).
 
