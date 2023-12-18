@@ -1,6 +1,6 @@
 {
   "name": "@awmottaz/prettier-plugin-void-html",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Prettier plugin to print void HTML elements without self-closing syntax",
   "author": {
     "email": "mail@tonymottaz.com",
