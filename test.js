@@ -42,7 +42,7 @@ allPrettierVersions.forEach((dep) => {
   test(`Prettier version ${version}`, async (t) => {
     await t.test("preserve void syntax on all void elements", async () => {
       const results = await Promise.all(
-        allVoidElements.map((el) => format(prettier, `<${el}>`))
+        allVoidElements.map((el) => format(prettier, `<${el}>`)),
       );
       results.forEach((formatted, index) => {
         assert.equal(formatted, `<${allVoidElements[index]}>\n`);
@@ -71,7 +71,7 @@ allPrettierVersions.forEach((dep) => {
     await t.test("preserve self-closing in SVG", async () => {
       const formatted = await format(
         prettier,
-        `<svg><circle cx="50" cy="50" r="50" /></svg>`
+        `<svg><circle cx="50" cy="50" r="50" /></svg>`,
       );
       assert.equal(formatted, `<svg><circle cx="50" cy="50" r="50" /></svg>\n`);
     });
@@ -79,11 +79,11 @@ allPrettierVersions.forEach((dep) => {
     await t.test("preserve self-closing in MathML", async () => {
       const formatted = await format(
         prettier,
-        `<math><mspace depth="40px" height="20px" width="100px" /></math>`
+        `<math><mspace depth="40px" height="20px" width="100px" /></math>`,
       );
       assert.equal(
         formatted,
-        `<math><mspace depth="40px" height="20px" width="100px" /></math>\n`
+        `<math><mspace depth="40px" height="20px" width="100px" /></math>\n`,
       );
     });
   });
