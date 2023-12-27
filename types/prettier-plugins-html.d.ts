@@ -1,5 +1,4 @@
 import type { Printer, Parser } from "prettier";
-// import "prettier/plugins/html";
 
 type HtmlNode = {
   namespace: string;
