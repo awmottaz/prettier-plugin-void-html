@@ -1,6 +1,11 @@
-import prettierParserHtml from "prettier/parser-html";
+import {
+  parsers as prettierHtmlParsers,
+  printers as prettierHtmlPrinters,
+} from "prettier/plugins/html";
 
-/** @type{import('prettier').Plugin['languages'] */
+/** @typedef  {import("prettier/plugins/html").HtmlNode} HtmlNode*/
+
+/** @type{import('prettier').SupportLanguage[]} */
 export const languages = [
   {
     name: "HTML5",
@@ -10,45 +15,57 @@ export const languages = [
   },
 ];
 
-/** @type{import('prettier').Plugin['parsers'] */
+/** @type{import('prettier').Parser<HtmlNode>} */
+const htmlParser = {
+  ...prettierHtmlParsers.html,
+  astFormat: "html",
+};
+
+/** @type {import('prettier').Plugin['parsers']} */
 export const parsers = {
-  html: {
-    ...prettierParserHtml.parsers.html,
-    astFormat: "html",
-  },
+  html: htmlParser,
 };
 
-/** @type{import('prettier').Plugin['printers'] */
-export const printers = {
-  html: {
-    ...prettierParserHtml.printers.html,
-    print(path, options, print) {
-      const { node } = path;
+/**
+ *
+ * @param {import('prettier/doc.js').builders.Doc} doc
+ * @returns {doc is import('prettier/doc.js').builders.Group}
+ */
+function isGroup(doc) {
+  return typeof doc === "object" && "type" in doc && doc.type === "group";
+}
 
-      // Self-closing syntax is allowed in SVG and MathML.
-      if (!["svg", "math"].includes(node.namespace)) {
-        node.isSelfClosing = false;
-      }
+/** @type {import('prettier').Printer<HtmlNode>} */
+const htmlPrinter = {
+  ...prettierHtmlPrinters.html,
+  print(path, options, print) {
+    const node = path.node;
 
-      if (!node?.tagDefinition?.isVoid) {
-        // Not a void tag, use the default printer.
-        return prettierParserHtml.printers.html.print(path, options, print);
-      }
+    // Self-closing syntax is allowed in SVG and MathML.
+    if (!["svg", "math"].includes(node.namespace)) {
+      node.isSelfClosing = false;
+    }
 
-      // Then pass it along to the default printer. Since it is no
-      // longer marked as self-closing, the printer will give it a
-      // closing tag. For example, `<input>` will become `<input></input>`.
-      const printed = prettierParserHtml.printers.html.print(
-        path,
-        options,
-        print,
-      );
+    if (!node.tagDefinition?.isVoid) {
+      // Not a void tag, use the default printer.
+      return prettierHtmlPrinters.html.print(path, options, print);
+    }
 
-      // The last item in the contents is the new closing tag.
-      // Remove it.
+    // Then pass it along to the default printer. Since it is no
+    // longer marked as self-closing, the printer will give it a
+    // closing tag. For example, `<input>` will become `<input></input>`.
+
+    const printed = prettierHtmlPrinters.html.print(path, options, print);
+
+    // The last item in the contents is the new closing tag.
+    // Remove it.
+    if (isGroup(printed) && Array.isArray(printed.contents)) {
       printed.contents.pop();
+    }
 
-      return printed;
-    },
+    return printed;
   },
 };
+
+/** @type {import('prettier').Plugin['printers']} */
+export const printers = { html: htmlPrinter };
