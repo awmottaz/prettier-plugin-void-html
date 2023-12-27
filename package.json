@@ -30,7 +30,7 @@
   "main": "prettier-plugin-void-html.js",
   "exports": "./prettier-plugin-void-html.js",
   "scripts": {
-    "lint": "prettier . --check && eslint --ext .js --ext .d.ts .",
+    "lint": "prettier . --check && eslint .",
     "test": "tsc && node --test test.js",
     "test:watch": "node --test --watch test.js",
     "prepublishOnly": "npm lint && npm test",
