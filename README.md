@@ -1,6 +1,6 @@
 # prettier-plugin-void-html
 
-This is a [Prettier plugin](https://prettier.io/docs/en/plugins) to format [void HTML elements](https://developer.mozilla.org/en-US/docs/Glossary/Void_element) using the void tag syntax instead of self-closing syntax. Additionally, if self-closing syntax is used on non-void elements, then it will be "unwrapped" so that both the opening and closing tags are present.
+This is a [Prettier plugin](https://prettier.io/docs/en/plugins) to format [void HTML elements](https://developer.mozilla.org/en-US/docs/Glossary/Void_element) using the void tag syntax instead of self-closing syntax. Additionally, if self-closing syntax is used on non-void elements, then they will be "unwrapped" so that both the opening and closing tags are present.
 
 ## Usage
 
@@ -60,6 +60,7 @@ Then your HTML should format like so:
 - `v3.0.2`
 - `v3.0.3`
 - `v3.1.0`
+- `v3.1.1`
 
 ### Languages
 
