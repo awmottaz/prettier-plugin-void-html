@@ -27,12 +27,42 @@ export const parsers = {
 };
 
 /**
- *
  * @param {import('prettier/doc.js').builders.Doc} doc
- * @returns {doc is import('prettier/doc.js').builders.Group}
+ * @param {(path: (number | string)[], value: string) => void} cb
+ * @param {(number | string)[] | undefined} path
  */
-function isGroup(doc) {
-  return typeof doc === "object" && "type" in doc && doc.type === "group";
+function walkTheDoc(doc, cb, path = []) {
+  if (typeof doc === "string") {
+    cb(path, doc);
+    return;
+  }
+
+  if (Array.isArray(doc)) {
+    doc.forEach((d, i) => {
+      walkTheDoc(d, cb, [...path, i]);
+    });
+    return;
+  }
+
+  if (doc.type === "group" || doc.type === "indent") {
+    walkTheDoc(doc.contents, cb, [...path, "contents"]);
+    return;
+  }
+
+  return;
+}
+
+/**
+ *
+ * @param {*} obj
+ * @param {(string | number)[]} pathSpec
+ */
+function getByPath(obj, pathSpec) {
+  let got = obj;
+  for (const key of pathSpec) {
+    got = got[key];
+  }
+  return got;
 }
 
 /** @type {import('prettier').Printer<HtmlNode>} */
@@ -40,15 +70,11 @@ const htmlPrinter = {
   ...prettierHtmlPrinters.html,
   print(path, options, print) {
     const node = path.node;
+    const isVoidTag = node.tagDefinition?.isVoid;
+    const isVoidAllowed = ["svg", "math"].includes(node.namespace);
 
-    // Self-closing syntax is allowed in SVG and MathML.
-    if (!["svg", "math"].includes(node.namespace)) {
+    if (!isVoidTag && !isVoidAllowed) {
       node.isSelfClosing = false;
-    }
-
-    if (!node.tagDefinition?.isVoid) {
-      // Not a void tag, use the default printer.
-      return prettierHtmlPrinters.html.print(path, options, print);
     }
 
     // Then pass it along to the default printer. Since it is no
@@ -57,11 +83,29 @@ const htmlPrinter = {
 
     const printed = prettierHtmlPrinters.html.print(path, options, print);
 
-    // The last item in the contents is the new closing tag.
-    // Remove it.
-    if (isGroup(printed) && Array.isArray(printed.contents)) {
-      printed.contents.pop();
-    }
+    walkTheDoc(printed, (path, doc) => {
+      if (node.attrs?.length === 0 && doc.startsWith(`<${node.name}`)) {
+        // If there are no attributes, Prettier inserts a space
+        // character before the self-closing bracket.
+        // Remove this space.
+        const _path = [...path];
+        _path.pop();
+        const last = _path.pop();
+        const val = getByPath(printed, _path);
+        if (val[last + 1] === " ") {
+          val[last + 1] = "";
+        }
+      }
+      if (doc.startsWith("/>") && path.length > 0) {
+        // console.log(JSON.stringify(printed));
+        // console.log({ path, doc, isVoidAllowed, node });
+        // Remove the `/` from the self-closing syntax.
+        const _path = [...path];
+        const last = _path.pop();
+        const val = getByPath(printed, _path);
+        val[last] = doc.substring(1);
+      }
+    });
 
     return printed;
   },

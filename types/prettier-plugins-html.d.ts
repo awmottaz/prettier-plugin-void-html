@@ -3,6 +3,8 @@ import type { Printer, Parser } from "prettier";
 type HtmlNode = {
   namespace: string;
   isSelfClosing: boolean;
+  name?: string;
+  attrs?: unknown[];
   tagDefinition?: {
     isVoid: boolean;
   };
