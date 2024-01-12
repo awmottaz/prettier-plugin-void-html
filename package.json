@@ -25,7 +25,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "files": [],
+  "files": [
+    "prettier-plugin-void-html.js",
+    "types"
+  ],
   "type": "module",
   "main": "prettier-plugin-void-html.js",
   "exports": "./prettier-plugin-void-html.js",
