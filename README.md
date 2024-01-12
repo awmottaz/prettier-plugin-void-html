@@ -61,6 +61,7 @@ Then your HTML should format like so:
 - `v3.0.3`
 - `v3.1.0`
 - `v3.1.1`
+- `v3.2.0`
 
 ### Languages
 
