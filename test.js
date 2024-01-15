@@ -28,20 +28,20 @@ const format = async (format, code) => {
 
 // https://developer.mozilla.org/en-US/docs/Glossary/Void_element
 const allVoidElements = [
-  "area",
-  "base",
-  "br",
-  "col",
-  "embed",
-  "hr",
-  "img",
-  "input",
-  "link",
-  "meta",
-  "param",
-  "source",
-  "track",
-  "wbr",
+  { el: "area", hasTrailingNewline: false },
+  { el: "base", hasTrailingNewline: false },
+  { el: "br", hasTrailingNewline: false },
+  { el: "col", hasTrailingNewline: true },
+  { el: "embed", hasTrailingNewline: false },
+  { el: "hr", hasTrailingNewline: true },
+  { el: "img", hasTrailingNewline: false },
+  { el: "input", hasTrailingNewline: false },
+  { el: "link", hasTrailingNewline: false },
+  { el: "meta", hasTrailingNewline: false },
+  { el: "param", hasTrailingNewline: true },
+  { el: "source", hasTrailingNewline: true },
+  { el: "track", hasTrailingNewline: true },
+  { el: "wbr", hasTrailingNewline: false },
 ];
 
 allPrettierVersions.forEach((dep) => {
@@ -50,12 +50,28 @@ allPrettierVersions.forEach((dep) => {
   test(`Prettier version ${version}`, async (t) => {
     await t.test("preserve void syntax on all void elements", async () => {
       const results = await Promise.all(
-        allVoidElements.map((el) => format(prettier.format, `<${el}>`)),
+        allVoidElements.map(({ el }) => format(prettier.format, `<${el}>`)),
       );
       results.forEach((formatted, index) => {
-        assert.equal(formatted, `<${allVoidElements[index]}>\n`);
+        assert.equal(formatted, `<${allVoidElements[index].el}>\n`);
       });
     });
+
+    await t.test(
+      "preserve void syntax on all void elements with character following",
+      async () => {
+        const results = await Promise.all(
+          allVoidElements.map(({ el }) => format(prettier.format, `<${el}>a`)),
+        );
+        results.forEach((formatted, index) => {
+          const { el, hasTrailingNewline } = allVoidElements[index];
+          assert.equal(
+            formatted,
+            `<${el}>${hasTrailingNewline ? "\n" : ""}a\n`,
+          );
+        });
+      },
+    );
 
     await t.test("avoid self-closing syntax on empty elements", async (t) => {
       await t.test("<div></div>", async () => {
@@ -71,6 +87,14 @@ allPrettierVersions.forEach((dep) => {
           `<input name="test" />`,
         );
         assert.equal(formatted, `<input name="test">\n`);
+      });
+
+      await t.test("input with character following", async () => {
+        const formatted = await format(
+          prettier.format,
+          `<input name="test" />a`,
+        );
+        assert.equal(formatted, `<input name="test">a\n`);
       });
 
       await t.test("div", async () => {
