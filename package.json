@@ -57,7 +57,7 @@
     "typescript": "5.3.3"
   },
   "peerDependencies": {
-    "prettier": "3.0.0 - 3.2.1"
+    "prettier": ">=3.0.0 <3.3.0"
   },
   "np": {
     "yarn": false
