@@ -46,26 +46,9 @@ const htmlPrinter = {
       node.isSelfClosing = false;
     }
 
+    // Element is not void - use default printer
     if (!node.tagDefinition?.isVoid) {
-      let printed = prettierHtmlPrinters.html.print(path, options, print);
-
-      // Remove borrowed previous void tag closing marker
-      // @ts-expect-error Property 'prev' does not exist on type 'HtmlNode'
-      if (path.node.prev?.tagDefinition?.isVoid) {
-        if (typeof printed === "string" && printed.startsWith(">"))
-          printed = printed.slice(1);
-        if (
-          isGroup(printed) &&
-          Array.isArray(printed.contents) &&
-          isGroup(printed.contents[0]) &&
-          Array.isArray(printed.contents[0].contents) &&
-          Array.isArray(printed.contents[0].contents[0])
-        ) {
-          printed.contents[0].contents[0].splice(0, 1);
-        }
-      }
-
-      return printed;
+      return prettierHtmlPrinters.html.print(path, options, print);
     }
 
     // Then pass it along to the default printer. Since it is no
@@ -78,6 +61,17 @@ const htmlPrinter = {
     // Remove it.
     if (isGroup(printed) && Array.isArray(printed.contents)) {
       printed.contents.pop();
+
+      // If the next element has borrowed the end marker from the new (removed) closing tag
+      // Remove the opening tag end marker
+      if (
+        path.next?.isLeadingSpaceSensitive &&
+        !path.next?.hasLeadingSpaces &&
+        isGroup(printed.contents[0]) &&
+        Array.isArray(printed.contents[0].contents)
+      ) {
+        printed.contents[0].contents.pop();
+      }
     }
 
     return printed;

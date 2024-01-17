@@ -6,6 +6,8 @@ type HtmlNode = {
   tagDefinition?: {
     isVoid: boolean;
   };
+  isLeadingSpaceSensitive?: boolean;
+  hasLeadingSpaces?: boolean;
 };
 
 export declare const parsers: {
