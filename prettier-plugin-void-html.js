@@ -48,13 +48,17 @@ const htmlPrinter = {
 
     // Element is not void - use default printer
     if (!node.tagDefinition?.isVoid) {
+      // Prevent forward slash in void tag borrowed end marker
+      if (path.previous?.tagDefinition?.isVoid) {
+        path.previous.isSelfClosing = false;
+      }
+
       return prettierHtmlPrinters.html.print(path, options, print);
     }
 
-    // Then pass it along to the default printer. Since it is no
+    // Pass element along to the default printer. Since it is no
     // longer marked as self-closing, the printer will give it a
     // closing tag. For example, `<input>` will become `<input></input>`.
-
     const printed = prettierHtmlPrinters.html.print(path, options, print);
 
     // The last item in the contents is the new closing tag.
@@ -74,6 +78,8 @@ const htmlPrinter = {
       }
     }
 
+    // Prevent unwanted linebreaks
+    node.isSelfClosing = true;
     return printed;
   },
 };
