@@ -55,6 +55,8 @@ Then your HTML should format like so:
 
 ### Prettier
 
+This package is tested against the following versions of Prettier (see `test.js` for details):
+
 - `v3.0.0`
 - `v3.0.1`
 - `v3.0.2`
@@ -63,6 +65,27 @@ Then your HTML should format like so:
 - `v3.1.1`
 - `v3.2.0`
 - `v3.2.1`
+- `v3.2.2`
+
+Note that the `peerDependencies` of this package allow installing newer _patch versions_ of Prettier that may not be included in this list. This is for pragmatic reasons so that you can upgrade patched releases of Prettier without waiting for this package to update.
+
+However, please note this disclaimer from the [Prettier installation page](https://prettier.io/docs/en/install):
+
+> Install an exact version of Prettier locally in your project. This makes sure that everyone in the project gets the exact same version of Prettier. Even a patch release of Prettier can result in slightly different formatting, so you wouldn’t want different team members using different versions and formatting each other’s changes back and forth.
+
+**If you wish to use a version of Prettier that is not supported by this package**, then you will need to add an [`overrides` rule](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#overrides). For example, to use an older version of Prettier:
+
+```json
+{
+  "overrides": {
+    "@awmottaz/prettier-plugin-void-html": {
+      "prettier": ">=2.8.8"
+    }
+  }
+}
+```
+
+If you do this, please consider [contributing to prettier-plugin-void-html](./CONTRIBUTING.md) by adding tests for that version or [opening an issue](https://github.com/awmottaz/prettier-plugin-void-html/issues). I am happy to expand support, but I also need to be pragmatic of my time.
 
 ### Languages
 

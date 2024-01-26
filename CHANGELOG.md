@@ -1,3 +1,9 @@
+## [v1.5.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.5.0)
+
+This release adds support for Prettier v3.2.2.
+
+This also relaxes the `peerDependencies` version range of Prettier so that you can upgrade patch versions without waiting for support from this package. See the `README` and [Pull Request](https://github.com/awmottaz/prettier-plugin-void-html/pull/13) for details.
+
 ## [v1.4.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.4.0)
 
 This release adds support for Prettier v3.2.1.
