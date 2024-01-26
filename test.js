@@ -116,7 +116,7 @@ allPrettierVersions.forEach((dep) => {
     });
 
     await t.test("Undo invalid self-closing syntax", async (t) => {
-      await t.test("input", async () => {
+      await t.test("void elements", async () => {
         const results = await Promise.all(
           allVoidElements.map(({ el }) => format(prettier.format, `<${el} />`)),
         );
