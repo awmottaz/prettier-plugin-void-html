@@ -51,10 +51,11 @@ const htmlPrinter = {
       return prettierHtmlPrinters.html.print(path, options, print);
     }
 
+    node.isSelfClosing = false;
+
     // Then pass it along to the default printer. Since it is no
     // longer marked as self-closing, the printer will give it a
     // closing tag. For example, `<input>` will become `<input></input>`.
-
     const printed = prettierHtmlPrinters.html.print(path, options, print);
 
     // The last item in the contents is the new closing tag.
