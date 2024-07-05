@@ -66,6 +66,7 @@ This package is tested against the following versions of Prettier (see `test.js`
 - `v3.2.0`
 - `v3.2.1`
 - `v3.2.2`
+- `v3.3.2`
 
 Note that the `peerDependencies` of this package allow installing newer _patch versions_ of Prettier that may not be included in this list. This is for pragmatic reasons so that you can upgrade patched releases of Prettier without waiting for this package to update.
 
