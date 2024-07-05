@@ -11,6 +11,7 @@ const allPrettierVersions = await Promise.all([
   import("prettier-3.2.0"),
   import("prettier-3.2.1"),
   import("prettier-3.2.2"),
+  import("prettier-3.3.2"),
 ]);
 
 /**
