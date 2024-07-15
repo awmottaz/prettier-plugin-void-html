@@ -55,18 +55,7 @@ Then your HTML should format like so:
 
 ### Prettier
 
-This package is tested against the following versions of Prettier (see `test.js` for details):
-
-- `v3.0.0`
-- `v3.0.1`
-- `v3.0.2`
-- `v3.0.3`
-- `v3.1.0`
-- `v3.1.1`
-- `v3.2.0`
-- `v3.2.1`
-- `v3.2.2`
-- `v3.3.2`
+This package is tested against all versions of Prettier starting with v3.0.0 and up to the latest version at the time of publishing. See `test.js` for the exact versions that are tested and `CHANGELOG.md` for support by plugin version.
 
 Note that the `peerDependencies` of this package allow installing newer _patch versions_ of Prettier that may not be included in this list. This is for pragmatic reasons so that you can upgrade patched releases of Prettier without waiting for this package to update.
 
@@ -90,7 +79,9 @@ If you do this, please consider [contributing to prettier-plugin-void-html](./CO
 
 ### Languages
 
-- `html`
+This project currently supports HTML, only. Support for other languages such as Svelte or Vue requires using an entirely different parser and is currently outside the scope of this plugin.
+
+If you want the features provided by this package in another language, I recommend submitting feedback to the other projects that handle formatting those languages.
 
 ### Void elements
 
