@@ -46,13 +46,13 @@ const htmlPrinter = {
       node.isSelfClosing = false;
     }
 
+    // Prevent forward slash in void tag borrowed end marker
+    if (path.previous?.tagDefinition?.isVoid) {
+      path.previous.isSelfClosing = false;
+    }
+
     // Element is not void - use default printer
     if (!node.tagDefinition?.isVoid) {
-      // Prevent forward slash in void tag borrowed end marker
-      if (path.previous?.tagDefinition?.isVoid) {
-        path.previous.isSelfClosing = false;
-      }
-
       return prettierHtmlPrinters.html.print(path, options, print);
     }
 
