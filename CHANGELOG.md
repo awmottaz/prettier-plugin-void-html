@@ -1,3 +1,7 @@
+## [v1.6.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.6.0)
+
+This release adds support for all Prettier versions up to v3.3.3.
+
 ## [v1.5.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.5.0)
 
 This release adds support for Prettier v3.2.2.
