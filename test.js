@@ -56,7 +56,7 @@ allPrettierVersions.forEach((dep) => {
   const { default: prettier, version } = dep;
 
   test(`Prettier version ${version}`, async (t) => {
-    await t.test("preserve void syntax on all void elements", async (t) => {
+    await t.test("preserve void syntax on all void elements", async () => {
       const results = await Promise.all(
         allVoidElements.map(({ el }) => format(prettier.format, `<${el}>`)),
       );
@@ -112,6 +112,21 @@ allPrettierVersions.forEach((dep) => {
         results.forEach((formatted, index) => {
           const { el } = allVoidElements[index];
           assert.equal(formatted, `<${el}>\n<div></div>\n`);
+        });
+      },
+    );
+
+    await t.test(
+      "preserve void syntax on all void elements with following void element",
+      async () => {
+        const results = await Promise.all(
+          allVoidElements.map(({ el }) =>
+            format(prettier.format, `<${el}><br>`),
+          ),
+        );
+        results.forEach((formatted, index) => {
+          const { el, hasTrailingNewline } = allVoidElements[index];
+          assert.equal(formatted, `<${el}>${hasTrailingNewline ? "\n" : ""}<br>\n`);
         });
       },
     );
