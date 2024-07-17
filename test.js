@@ -126,7 +126,10 @@ allPrettierVersions.forEach((dep) => {
         );
         results.forEach((formatted, index) => {
           const { el, hasTrailingNewline } = allVoidElements[index];
-          assert.equal(formatted, `<${el}>${hasTrailingNewline ? "\n" : ""}<br>\n`);
+          assert.equal(
+            formatted,
+            `<${el}>${hasTrailingNewline ? "\n" : ""}<br>\n`,
+          );
         });
       },
     );
