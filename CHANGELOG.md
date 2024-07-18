@@ -1,3 +1,12 @@
+## [v1.6.1](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.6.1)
+
+This release fixes a bug where void tags could be printed with a duplicate closing bracket `>` under certain conditions. Big thanks to [@f11xter](https://github.com/f11xter) for figuring this out!
+
+Original issue: [#10](https://github.com/awmottaz/prettier-plugin-void-html/issues/10)
+PR to fix: [#14](https://github.com/awmottaz/prettier-plugin-void-html/pull/14)
+
+Full diff here: [v1.6.0...v1.6.1](https://github.com/awmottaz/prettier-plugin-void-html/compare/v1.6.0...v1.6.1)
+
 ## [v1.6.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.6.0)
 
 This release adds support for all Prettier versions up to v3.3.3.
