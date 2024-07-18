@@ -34,7 +34,14 @@ const format = async (format, code) => {
   return output;
 };
 
-// https://developer.mozilla.org/en-US/docs/Glossary/Void_element
+/**
+ * The list of all void elements can be found here:
+ * https://developer.mozilla.org/en-US/docs/Glossary/Void_element
+ *
+ * Additionally, Prettier has some opaque logic to determine whether they will force a trailing line
+ * break after printing each of these elements. The `hasTrailingNewline` values here were determined
+ * experimentally.
+ */
 const allVoidElements = [
   { el: "area", hasTrailingNewline: false },
   { el: "base", hasTrailingNewline: false },
