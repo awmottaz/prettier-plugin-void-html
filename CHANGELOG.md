@@ -1,3 +1,20 @@
+## [v1.7.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.7.0)
+
+### Plugin changes
+
+- Adds support for Prettier v3.4.0 and v3.4.1
+  - [#25](https://github.com/awmottaz/prettier-plugin-void-html/pull/25) ([@rgant](https://github.com/rgant))
+
+### Development changes
+
+- Upgrades Node.js to v22 (LTS)
+- Upgrades TypeScript to 5.7
+- Upgrades ESLint to v9
+- Simplifies tsconfig and ESLint config
+- Adds a new `RELEASE.md` doc for my release procedures
+
+Full diff here: [v1.6.1...v1.7.0](https://github.com/awmottaz/prettier-plugin-void-html/compare/v1.6.1...v1.7.0)
+
 ## [v1.6.1](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.6.1)
 
 This release fixes a bug where void tags could be printed with a duplicate closing bracket `>` under certain conditions. Big thanks to [@f11xter](https://github.com/f11xter) for figuring this out!
