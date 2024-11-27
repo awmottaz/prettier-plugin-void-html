@@ -23,20 +23,6 @@ const allPrettierVersions = await Promise.all([
 ]);
 
 /**
- * @param {typeof allPrettierVersions[number]['format']} format
- * @param {string} code
- * @returns {Promise<string>}
- */
-const format = async (format, code) => {
-  // @ts-expect-error type union is too complex
-  const output = await format(code, {
-    parser: "html",
-    plugins: ["./prettier-plugin-void-html.js"],
-  });
-  return output;
-};
-
-/**
  * The list of all void elements can be found here:
  * https://developer.mozilla.org/en-US/docs/Glossary/Void_element
  *
@@ -61,13 +47,25 @@ const allVoidElements = [
   { el: "wbr", hasTrailingNewline: false },
 ];
 
-allPrettierVersions.forEach((dep) => {
-  const { default: prettier, version } = dep;
+for (const { default: prettier, version } of allPrettierVersions) {
+  /**
+   * Format using the current prettier formatter and the plugin.
+   * @param {string} code
+   * @returns {Promise<string>}
+   */
+  async function format(code) {
+    // @ts-expect-error type union is too complex
+    return prettier.format(code, {
+      parser: "html",
+      // @ts-expect-error type union is too complex
+      plugins: ["./prettier-plugin-void-html.js"],
+    });
+  }
 
-  test(`Prettier version ${version}`, async (t) => {
+  void test(`Prettier version ${version}`, async (t) => {
     await t.test("preserve void syntax on all void elements", async () => {
       const results = await Promise.all(
-        allVoidElements.map(({ el }) => format(prettier.format, `<${el}>`)),
+        allVoidElements.map(({ el }) => format(`<${el}>`)),
       );
       results.forEach((formatted, index) => {
         assert.equal(formatted, `<${allVoidElements[index].el}>\n`);
@@ -78,9 +76,7 @@ allPrettierVersions.forEach((dep) => {
       "preserve void syntax on all void elements with following text",
       async () => {
         const results = await Promise.all(
-          allVoidElements.map(({ el }) =>
-            format(prettier.format, `<${el}>text`),
-          ),
+          allVoidElements.map(({ el }) => format(`<${el}>text`)),
         );
         results.forEach((formatted, index) => {
           const { el, hasTrailingNewline } = allVoidElements[index];
@@ -96,9 +92,7 @@ allPrettierVersions.forEach((dep) => {
       "preserve void syntax on all void elements with following inline element",
       async () => {
         const results = await Promise.all(
-          allVoidElements.map(({ el }) =>
-            format(prettier.format, `<${el}><span></span>`),
-          ),
+          allVoidElements.map(({ el }) => format(`<${el}><span></span>`)),
         );
         results.forEach((formatted, index) => {
           const { el, hasTrailingNewline } = allVoidElements[index];
@@ -114,9 +108,7 @@ allPrettierVersions.forEach((dep) => {
       "preserve void syntax on all void elements with following block element",
       async () => {
         const results = await Promise.all(
-          allVoidElements.map(({ el }) =>
-            format(prettier.format, `<${el}><div></div>`),
-          ),
+          allVoidElements.map(({ el }) => format(`<${el}><div></div>`)),
         );
         results.forEach((formatted, index) => {
           const { el } = allVoidElements[index];
@@ -129,9 +121,7 @@ allPrettierVersions.forEach((dep) => {
       "preserve void syntax on all void elements with following void element",
       async () => {
         const results = await Promise.all(
-          allVoidElements.map(({ el }) =>
-            format(prettier.format, `<${el}><br>`),
-          ),
+          allVoidElements.map(({ el }) => format(`<${el}><br>`)),
         );
         results.forEach((formatted, index) => {
           const { el, hasTrailingNewline } = allVoidElements[index];
@@ -145,7 +135,7 @@ allPrettierVersions.forEach((dep) => {
 
     await t.test("avoid self-closing syntax on empty elements", async (t) => {
       await t.test("<div></div>", async () => {
-        const formatted = await format(prettier.format, `<div></div>`);
+        const formatted = await format(`<div></div>`);
         assert.equal(formatted, `<div></div>\n`);
       });
     });
@@ -153,7 +143,7 @@ allPrettierVersions.forEach((dep) => {
     await t.test("Undo invalid self-closing syntax", async (t) => {
       await t.test("void elements", async () => {
         const results = await Promise.all(
-          allVoidElements.map(({ el }) => format(prettier.format, `<${el} />`)),
+          allVoidElements.map(({ el }) => format(`<${el} />`)),
         );
         results.forEach((formatted, index) => {
           const { el } = allVoidElements[index];
@@ -162,14 +152,13 @@ allPrettierVersions.forEach((dep) => {
       });
 
       await t.test("div", async () => {
-        const formatted = await format(prettier.format, `<div />`);
+        const formatted = await format(`<div />`);
         assert.equal(formatted, `<div></div>\n`);
       });
     });
 
     await t.test("preserve self-closing in SVG", async () => {
       const formatted = await format(
-        prettier.format,
         `<svg><circle cx="50" cy="50" r="50" /></svg>`,
       );
       assert.equal(formatted, `<svg><circle cx="50" cy="50" r="50" /></svg>\n`);
@@ -177,7 +166,6 @@ allPrettierVersions.forEach((dep) => {
 
     await t.test("preserve self-closing in MathML", async () => {
       const formatted = await format(
-        prettier.format,
         `<math><mspace depth="40px" height="20px" width="100px" /></math>`,
       );
       assert.equal(
@@ -186,4 +174,4 @@ allPrettierVersions.forEach((dep) => {
       );
     });
   });
-});
+}
