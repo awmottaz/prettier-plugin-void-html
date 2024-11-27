@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["ESNext"],
     "target": "ESNext",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
@@ -7,14 +8,16 @@
     "checkJs": true,
     "noEmit": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "useUnknownInCatchVariables": true,
-    "skipLibCheck": true,
     "paths": {
       "prettier/plugins/html": ["./types/prettier-plugins-html.d.ts"]
     }
   },
-  "include": ["prettier-plugin-void-html.js"]
+  "files": [
+    "eslint.config.js",
+    "prettier-plugin-void-html.js",
+    "test.js",
+    "types/prettier-plugins-html.d.ts"
+  ]
 }

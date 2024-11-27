@@ -70,7 +70,7 @@ const htmlPrinter = {
       // Remove the opening tag end marker
       if (
         path.next?.isLeadingSpaceSensitive &&
-        !path.next?.hasLeadingSpaces &&
+        !path.next.hasLeadingSpaces &&
         isGroup(printed.contents[0]) &&
         Array.isArray(printed.contents[0].contents)
       ) {
