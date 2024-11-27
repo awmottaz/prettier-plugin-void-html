@@ -42,7 +42,7 @@ This procedure list is inspired by [Eleventy's release instructions](https://git
 9. Tag the new version
 
    ```sh
-   git tag -a vX.Y.Z -m
+   git tag -a vX.Y.Z
    ```
 
    This will launch your editor. Write the changelog information in here, using the shortlog as a starting point.
