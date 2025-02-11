@@ -1,3 +1,8 @@
+## Future
+
+- Add support for Prettier v3.4.2
+- Add support for Prettier v3.5.0
+
 ## [v1.7.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.7.0)
 
 ### Plugin changes
