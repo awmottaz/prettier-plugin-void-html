@@ -58,11 +58,6 @@ This procedure list is inspired by [Eleventy's release instructions](https://git
     npm publish
     ```
 
-13. Create a GitHub release from the new tag. Use the shortlog as a starting point for release notes.
-
-    ```sh
-    git shortlog <previous-version>..HEAD
-    ```
-
+13. Create a GitHub release from the new tag.
 14. On this branch, update the changelog by copy-pasting the release description from GitHub. Commit and push the changes.
 15. Merge the PR.

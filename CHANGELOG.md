@@ -1,3 +1,10 @@
+## [v1.9.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.9.0)
+
+- Add support for Prettier 3.5.1, 3.5.2, 3.5.3, and 3.6.0 by @bendera in https://github.com/awmottaz/prettier-plugin-void-html/pull/36
+- Add support for Prettier 3.6.1
+
+**Full Changelog**: https://github.com/awmottaz/prettier-plugin-void-html/compare/v1.8.0...v1.9.0
+
 ## [v1.8.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.8.0)
 
 - add support for prettier v3.4.2 and v3.5.0 by @awmottaz in https://github.com/awmottaz/prettier-plugin-void-html/pull/31
