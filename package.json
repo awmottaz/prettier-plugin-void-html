@@ -1,84 +1,84 @@
 {
-  "name": "@awmottaz/prettier-plugin-void-html",
-  "version": "1.9.0",
-  "description": "Prettier plugin to print void HTML elements without self-closing syntax",
-  "author": {
-    "email": "mail@tonymottaz.com",
-    "name": "Tony Mottaz",
-    "url": "https://github.com/awmottaz"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/awmottaz/prettier-plugin-void-html.git"
-  },
-  "bugs": {
-    "url": "https://github.com/awmottaz/prettier-plugin-void-html/issues"
-  },
-  "homepage": "https://github.com/awmottaz/prettier-plugin-void-html#readme",
-  "keywords": [
-    "prettier",
-    "prettier-plugin",
-    "html",
-    "void"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "prettier-plugin-void-html.js",
-    "types"
-  ],
-  "type": "module",
-  "main": "prettier-plugin-void-html.js",
-  "exports": "./prettier-plugin-void-html.js",
-  "scripts": {
-    "lint": "prettier . --check && eslint .",
-    "test": "tsc && node --test test.js",
-    "test:watch": "node --test --watch test.js",
-    "prepublishOnly": "npm run lint"
-  },
-  "devDependencies": {
-    "@eslint/js": "9.29.0",
-    "@types/node": "24.0.4",
-    "eslint": "9.29.0",
-    "eslint-config-prettier": "10.1.5",
-    "eslint-plugin-prettier": "5.5.1",
-    "prettier": "3.7.3",
-    "prettier-3.0.0": "npm:prettier@3.0.0",
-    "prettier-3.0.1": "npm:prettier@3.0.1",
-    "prettier-3.0.2": "npm:prettier@3.0.2",
-    "prettier-3.0.3": "npm:prettier@3.0.3",
-    "prettier-3.1.0": "npm:prettier@3.1.0",
-    "prettier-3.1.1": "npm:prettier@3.1.1",
-    "prettier-3.2.0": "npm:prettier@3.2.0",
-    "prettier-3.2.1": "npm:prettier@3.2.1",
-    "prettier-3.2.2": "npm:prettier@3.2.2",
-    "prettier-3.2.3": "npm:prettier@3.2.3",
-    "prettier-3.2.4": "npm:prettier@3.2.4",
-    "prettier-3.2.5": "npm:prettier@3.2.5",
-    "prettier-3.3.0": "npm:prettier@3.3.0",
-    "prettier-3.3.1": "npm:prettier@3.3.1",
-    "prettier-3.3.2": "npm:prettier@3.3.2",
-    "prettier-3.3.3": "npm:prettier@3.3.3",
-    "prettier-3.4.0": "npm:prettier@3.4.0",
-    "prettier-3.4.1": "npm:prettier@3.4.1",
-    "prettier-3.4.2": "npm:prettier@3.4.2",
-    "prettier-3.5.0": "npm:prettier@3.5.0",
-    "prettier-3.5.1": "npm:prettier@3.5.1",
-    "prettier-3.5.2": "npm:prettier@3.5.2",
-    "prettier-3.5.3": "npm:prettier@3.5.3",
-    "prettier-3.6.0": "npm:prettier@3.6.0",
-    "prettier-3.6.1": "npm:prettier@3.6.1",
-    "prettier-3.6.2": "npm:prettier@3.6.2",
-    "prettier-3.7.0": "npm:prettier@3.7.0",
-    "prettier-3.7.1": "npm:prettier@3.7.1",
-    "prettier-3.7.2": "npm:prettier@3.7.2",
-    "prettier-3.7.3": "npm:prettier@3.7.3",
-    "typescript": "5.8.3",
-    "typescript-eslint": "8.35.0"
-  },
-  "peerDependencies": {
-    "prettier": "3.0.0 - 3.7.x"
-  }
+	"name": "@awmottaz/prettier-plugin-void-html",
+	"version": "1.10.0",
+	"description": "Prettier plugin to print void HTML elements without self-closing syntax",
+	"author": {
+		"email": "mail@tonymottaz.com",
+		"name": "Tony Mottaz",
+		"url": "https://github.com/awmottaz"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/awmottaz/prettier-plugin-void-html.git"
+	},
+	"bugs": {
+		"url": "https://github.com/awmottaz/prettier-plugin-void-html/issues"
+	},
+	"homepage": "https://github.com/awmottaz/prettier-plugin-void-html#readme",
+	"keywords": [
+		"prettier",
+		"prettier-plugin",
+		"html",
+		"void"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"files": [
+		"prettier-plugin-void-html.js",
+		"types"
+	],
+	"type": "module",
+	"main": "prettier-plugin-void-html.js",
+	"exports": "./prettier-plugin-void-html.js",
+	"scripts": {
+		"lint": "prettier . --check && eslint .",
+		"test": "tsc && node --test test.js",
+		"test:watch": "node --test --watch test.js",
+		"prepublishOnly": "npm run lint"
+	},
+	"devDependencies": {
+		"@eslint/js": "9.29.0",
+		"@types/node": "24.0.4",
+		"eslint": "9.29.0",
+		"eslint-config-prettier": "10.1.5",
+		"eslint-plugin-prettier": "5.5.1",
+		"prettier": "3.7.3",
+		"prettier-3.0.0": "npm:prettier@3.0.0",
+		"prettier-3.0.1": "npm:prettier@3.0.1",
+		"prettier-3.0.2": "npm:prettier@3.0.2",
+		"prettier-3.0.3": "npm:prettier@3.0.3",
+		"prettier-3.1.0": "npm:prettier@3.1.0",
+		"prettier-3.1.1": "npm:prettier@3.1.1",
+		"prettier-3.2.0": "npm:prettier@3.2.0",
+		"prettier-3.2.1": "npm:prettier@3.2.1",
+		"prettier-3.2.2": "npm:prettier@3.2.2",
+		"prettier-3.2.3": "npm:prettier@3.2.3",
+		"prettier-3.2.4": "npm:prettier@3.2.4",
+		"prettier-3.2.5": "npm:prettier@3.2.5",
+		"prettier-3.3.0": "npm:prettier@3.3.0",
+		"prettier-3.3.1": "npm:prettier@3.3.1",
+		"prettier-3.3.2": "npm:prettier@3.3.2",
+		"prettier-3.3.3": "npm:prettier@3.3.3",
+		"prettier-3.4.0": "npm:prettier@3.4.0",
+		"prettier-3.4.1": "npm:prettier@3.4.1",
+		"prettier-3.4.2": "npm:prettier@3.4.2",
+		"prettier-3.5.0": "npm:prettier@3.5.0",
+		"prettier-3.5.1": "npm:prettier@3.5.1",
+		"prettier-3.5.2": "npm:prettier@3.5.2",
+		"prettier-3.5.3": "npm:prettier@3.5.3",
+		"prettier-3.6.0": "npm:prettier@3.6.0",
+		"prettier-3.6.1": "npm:prettier@3.6.1",
+		"prettier-3.6.2": "npm:prettier@3.6.2",
+		"prettier-3.7.0": "npm:prettier@3.7.0",
+		"prettier-3.7.1": "npm:prettier@3.7.1",
+		"prettier-3.7.2": "npm:prettier@3.7.2",
+		"prettier-3.7.3": "npm:prettier@3.7.3",
+		"typescript": "5.8.3",
+		"typescript-eslint": "8.35.0"
+	},
+	"peerDependencies": {
+		"prettier": "3.0.0 - 3.7.x"
+	}
 }
