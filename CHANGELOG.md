@@ -1,3 +1,7 @@
+## [v2.0.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v2.0.0)
+
+This project is now in **maintenance mode**. Please see the README for further information.
+
 ## [v1.10.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v1.10.0)
 
 ### What's Changed
