@@ -75,10 +75,13 @@
     "prettier-3.7.1": "npm:prettier@3.7.1",
     "prettier-3.7.2": "npm:prettier@3.7.2",
     "prettier-3.7.3": "npm:prettier@3.7.3",
+    "prettier-3.7.4": "npm:prettier@3.7.4",
+    "prettier-3.8.0": "npm:prettier@3.8.0",
+    "prettier-3.8.1": "npm:prettier@3.8.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.35.0"
   },
   "peerDependencies": {
-    "prettier": "3.0.0 - 3.7.x"
+    "prettier": "3.0.0 - 3.8.x"
   }
 }
