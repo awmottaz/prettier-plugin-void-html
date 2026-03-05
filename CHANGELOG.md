@@ -1,3 +1,24 @@
+## Next
+
+## [v2.1.0](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.0.0...v2.1.0)
+
+### Notable changes
+
+- add support for prettier v3.7.4-v3.8.1 66c8c9f
+
+### All changes
+
+- Merge pull request #45 from awmottaz/cleanup-and-np 78e9612
+- remove release docs dcf4f33
+- install np ced5beb
+- vscode settings: use prettier as formatter a98a3a5
+- upgrade default prettier dependency 64d2a8d
+- Merge pull request #44 from bendera/43-add-missing-prettier-versions 618f830
+- update lockfile 8cd9768
+- add support for prettier v3.7.4-v3.8.1 66c8c9f
+- Merge pull request #42 from awmottaz/release/v2.0.0 f354d3c
+- update changelog a6cdf31
+
 ## [v2.0.0](https://github.com/awmottaz/prettier-plugin-void-html/releases/tag/v2.0.0)
 
 This project is now in **maintenance mode**. Please see the README for further information.
