@@ -11,11 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          node-version: 26
-          cache: npm
+          node-version-file: .node-version
+          check-latest: true
+          package-manager-cache: false
       - run: npm install
       - run: npm run lint
 
@@ -27,11 +28,11 @@ jobs:
         node-version: [20.x, 22.x, 24.x, 26.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+          package-manager-cache: false
       - run: npm install
       - run: npm run test
