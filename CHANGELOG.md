@@ -1,5 +1,7 @@
 ## Next
 
+- Add support for Prettier@3.9
+
 ## [v2.1.0](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.0.0...v2.1.0)
 
 ### Notable changes
