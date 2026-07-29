@@ -36,10 +36,10 @@
     "lint": "prettier . --check && eslint .",
     "test": "tsc && node --test test.js",
     "test:watch": "node --test --watch test.js",
-    "release-test": "npm run lint && npm run test",
-    "release": "np"
+    "release-test": "npm run lint && npm run test"
   },
   "np": {
+    "branch": "main",
     "testScript": "release-test"
   },
   "engines": {
