@@ -42,6 +42,18 @@
   "np": {
     "testScript": "release-test"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "22.23.x || 24.18.x || 26.5.x",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": ">12.0.0",
+      "onFail": "warn"
+    }
+  },
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@types/node": "26.1.2",
