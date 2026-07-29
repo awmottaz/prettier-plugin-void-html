@@ -13,7 +13,8 @@
     "erasableSyntaxOnly": true,
     "paths": {
       "prettier/plugins/html": ["./types/prettier-plugins-html.d.ts"]
-    }
+    },
+    "types": ["node"]
   },
   "files": [
     "eslint.config.js",
