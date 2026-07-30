@@ -69,7 +69,7 @@ const htmlPrinter = {
     //   <span> <area> </span>
     // In the first case Prettier borrows the parent's closing tag to print
     // the void element, which requires additional cleanup below.
-    const nestedVoidWithoutSurroundingSpaces =
+    const isNestedVoidWithoutSurroundingSpaces =
       !path.next &&
       parent?.kind === "element" &&
       !node.hasLeadingSpaces &&
@@ -86,7 +86,7 @@ const htmlPrinter = {
       // the borrowed closing tag leaves an extra ">" in the inner group.
       // Remove that final token so the parent closing tag remains intact.
       if (
-        nestedVoidWithoutSurroundingSpaces &&
+        isNestedVoidWithoutSurroundingSpaces &&
         isGroup(printed.contents[0]) &&
         Array.isArray(printed.contents[0].contents) &&
         printed.contents[0].contents.length === 3 &&
@@ -111,7 +111,7 @@ const htmlPrinter = {
     // Restore the original self-closing state in all cases except the special
     // nested-inline scenario above, where keeping it disabled prevents
     // Prettier from reintroducing synthetic closing markers.
-    if (!nestedVoidWithoutSurroundingSpaces) {
+    if (!isNestedVoidWithoutSurroundingSpaces) {
       node.isSelfClosing = originalIsSelfClosing;
     }
     return printed;

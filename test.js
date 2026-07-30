@@ -127,10 +127,7 @@ for (const { default: prettier, version } of allPrettierVersions) {
         );
         results.forEach((formatted, index) => {
           const { el } = allVoidElements[index];
-          assert.equal(
-            formatted,
-            `<span><${el}></span>\n`,
-          );
+          assert.equal(formatted, `<span><${el}></span>\n`);
         });
       },
     );
@@ -143,10 +140,7 @@ for (const { default: prettier, version } of allPrettierVersions) {
         );
         results.forEach((formatted, index) => {
           const { el } = allVoidElements[index];
-          assert.equal(
-            formatted,
-            `<span> <${el}> </span>\n`,
-          );
+          assert.equal(formatted, `<span> <${el}> </span>\n`);
         });
       },
     );
