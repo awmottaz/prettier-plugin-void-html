@@ -1,4 +1,60 @@
+# Changelog
+
+This changelog is managed by hand. If you are contributing and want to add additional context or
+notes beyond your commit message, please add them to the `## Next` section.
+
+Prior to a new release, I will grab a list of all changes using this script:
+
+```sh
+git shortlog --format='%s %h' v<previous>..HEAD
+```
+
+And these details will be added to the Changelog for that version.
+
+The contents of this Changelog are also included in the GitHub release.
+
 ## Next
+
+## [v2.2.0](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.1.0...v2.2.0)
+
+### Notable changes
+
+- @rakleed: feat: add support for Prettier@3.9 f4abb1b
+
+**Note to contributors:** I did some housekeeping to the tooling of this repository. If you are
+grabbing a fresh clone of the repository, just running an `npm install` is sufficient. If you have
+an existing checkout, please make sure you upgrade your local environment:
+
+```sh
+git pull
+rm -rf node_modules
+rm package-lock.json
+npm install
+# restart your editor to make sure the TypeScript and ESLint language servers are fresh
+```
+
+### All changes
+
+@awmottaz:
+
+- update changelog 386649b
+- Merge pull request #48 from rakleed/feature/prettier-3.9-support b5cdd33
+- update vscode settings c3fe70b
+- stop tracking vscode settings ea3d4a1
+- no more lockfile 755a5ec
+- add support for node v26 0f601c1
+- upgrade eslint to v10 94f91b6
+- upgrade typescript, fix eslint config 410bce9
+- upgrade np c9eedb1
+- add devEngines ee1bf3a
+- add engines config to package.json 7fe53af
+- config npm to sign git tags 8a410ab
+- update release process 7fb0346
+- update the contributing guide daa0a19
+
+@rakleed
+
+- feat: add support for Prettier@3.9 f4abb1b
 
 ## [v2.1.0](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.0.0...v2.1.0)
 
