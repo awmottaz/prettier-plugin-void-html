@@ -6,7 +6,7 @@ notes beyond your commit message, please add them to the `## Next` section.
 Prior to a new release, I will grab a list of all changes using this script:
 
 ```sh
-git shortlog --format='%s %h' v<previous>..HEAD
+git shortlog --format='%s %h' --no-merges vN.N.N..HEAD
 ```
 
 And these details will be added to the Changelog for that version.
@@ -14,6 +14,30 @@ And these details will be added to the Changelog for that version.
 The contents of this Changelog are also included in the GitHub release.
 
 ## Next
+
+## [v2.2.1](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.2.0...v2.2.1)
+
+### Notable changes
+
+#46
+Closes #30
+
+Fixed a bug where void elements nested in other tags without whitespace characters surrounding the
+void tag were printed with an extraneous self-closing tag. Thanks to @avicndugu for fixing this!
+
+### All changes
+
+@awmottaz:
+
+- use npm install in GitHub actions 2685a76
+- other fixes to GH actions 2644997
+- upgrade np 55cad82
+
+@avicndugu:
+
+- Preserve void element syntax in nested inline contexts 4e10d4f
+- Remove redundant test case 802638f
+- rename variable to boolean with linting 233d6b2
 
 ## [v2.2.0](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.1.0...v2.2.0)
 
