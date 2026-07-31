@@ -40,6 +40,8 @@ const htmlPrinter = {
   ...prettierHtmlPrinters.html,
   print(path, options, print) {
     const node = path.node;
+    const originalIsSelfClosing = node.isSelfClosing;
+    const parent = path.parent;
 
     // Self-closing syntax is allowed in SVG and MathML.
     if (!["svg", "math"].includes(node.namespace)) {
@@ -61,13 +63,42 @@ const htmlPrinter = {
     // closing tag. For example, `<input>` will become `<input></input>`.
     const printed = prettierHtmlPrinters.html.print(path, options, print);
 
-    // The last item in the contents is the new closing tag.
-    // Remove it.
+    // Detect nested inline elements without spaces:
+    //   <span><area></span>
+    // but not:
+    //   <span> <area> </span>
+    // In the first case Prettier borrows the parent's closing tag to print
+    // the void element, which requires additional cleanup below.
+    const isNestedVoidWithoutSurroundingSpaces =
+      !path.next &&
+      parent?.kind === "element" &&
+      !node.hasLeadingSpaces &&
+      !node.hasTrailingSpaces;
+
+    // Prettier prints a synthetic closing tag for void elements. Remove it
+    // so the output remains valid HTML:
+    // <area></area>  ->  <area>
     if (isGroup(printed) && Array.isArray(printed.contents)) {
       printed.contents.pop();
 
-      // If the next element has borrowed the end marker from the new (removed) closing tag
-      // Remove the opening tag end marker
+      // For nested inline cases such as:
+      // <span><area></span>
+      // the borrowed closing tag leaves an extra ">" in the inner group.
+      // Remove that final token so the parent closing tag remains intact.
+      if (
+        isNestedVoidWithoutSurroundingSpaces &&
+        isGroup(printed.contents[0]) &&
+        Array.isArray(printed.contents[0].contents) &&
+        printed.contents[0].contents.length === 3 &&
+        printed.contents[0].contents[2] === ">"
+      ) {
+        printed.contents[0].contents.pop();
+      }
+      // When a following inline element is whitespace-sensitive and there is
+      // no separating space:
+      // <area><span></span>
+      // Prettier again borrows part of the closing marker. Remove the extra
+      // token to prevent malformed output.
       if (
         path.next?.isLeadingSpaceSensitive &&
         !path.next.hasLeadingSpaces &&
@@ -77,9 +108,12 @@ const htmlPrinter = {
         printed.contents[0].contents.pop();
       }
     }
-
-    // Prevent unwanted linebreaks
-    node.isSelfClosing = true;
+    // Restore the original self-closing state in all cases except the special
+    // nested-inline scenario above, where keeping it disabled prevents
+    // Prettier from reintroducing synthetic closing markers.
+    if (!isNestedVoidWithoutSurroundingSpaces) {
+      node.isSelfClosing = originalIsSelfClosing;
+    }
     return printed;
   },
 };

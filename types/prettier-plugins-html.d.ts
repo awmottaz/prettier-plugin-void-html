@@ -8,6 +8,11 @@ type HtmlNode = {
   };
   isLeadingSpaceSensitive?: boolean;
   hasLeadingSpaces?: boolean;
+  hasTrailingSpaces?: boolean;
+  kind?: string;
+  parent?: {
+    kind: "root" | "element";
+  };
 };
 
 export declare const parsers: {
