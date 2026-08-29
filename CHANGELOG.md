@@ -15,6 +15,9 @@ The contents of this Changelog are also included in the GitHub release.
 
 ## Next
 
+#49
+Keep the closing `>` on void elements nested in block parents such as `<head>`. Thanks to @ole for reporting this!
+
 ## [v2.2.1](https://github.com/awmottaz/prettier-plugin-void-html/compare/v2.2.0...v2.2.1)
 
 ### Notable changes
