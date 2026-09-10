@@ -157,6 +157,32 @@ for (const { default: prettier, version } of allPrettierVersions) {
     );
 
     await t.test(
+      "preserve void syntax on all void elements nested within head",
+      async () => {
+        const results = await Promise.all(
+          allVoidElements.map(({ el }) => format(`<head><${el}></head>`)),
+        );
+        results.forEach((formatted, index) => {
+          const { el } = allVoidElements[index];
+          assert.equal(formatted, `<head>\n  <${el}>\n</head>\n`);
+        });
+      },
+    );
+
+    await t.test(
+      "preserve closing greater-than on attributed void nested in head",
+      async () => {
+        const formatted = await format(
+          `<head><link href="/style.css" rel="stylesheet"/></head>`,
+        );
+        assert.equal(
+          formatted,
+          `<head>\n  <link href="/style.css" rel="stylesheet">\n</head>\n`,
+        );
+      },
+    );
+
+    await t.test(
       "preserve void syntax on all void elements with following block element",
       async () => {
         const results = await Promise.all(

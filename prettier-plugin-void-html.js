@@ -85,12 +85,17 @@ const htmlPrinter = {
       // <span><area></span>
       // the borrowed closing tag leaves an extra ">" in the inner group.
       // Remove that final token so the parent closing tag remains intact.
+      // Only pop when the inner group is prefixed with the parent's borrowed
+      // ">"; block parents like <head> do not borrow, so that token is the
+      // void tag's own terminator.
       if (
         isNestedVoidWithoutSurroundingSpaces &&
         isGroup(printed.contents[0]) &&
         Array.isArray(printed.contents[0].contents) &&
         printed.contents[0].contents.length === 3 &&
-        printed.contents[0].contents[2] === ">"
+        printed.contents[0].contents[2] === ">" &&
+        Array.isArray(printed.contents[0].contents[0]) &&
+        printed.contents[0].contents[0][0] === ">"
       ) {
         printed.contents[0].contents.pop();
       }
