@@ -1,104 +1,42 @@
 # prettier-plugin-void-html
 
-> [!WARNING]
-> **Notice of maintenance mode**
->
-> Now that [Biome](https://biomejs.dev) has support for [HTML](https://biomejs.dev/internals/language-support/) — and they properly handle void elements — I no longer have a personal interest in developing this plugin. However, I also recognize that this plugin has gained some amount of popularity, and that suddenly abandoning this project would be an unwelcome surprise to downstream projects that depend on it.
->
-> With that said, this is my plan for the remainder of this repository's lifetime:
->
-> 1. I will not spend any additional effort to fix any [current](https://github.com/awmottaz/prettier-plugin-void-html/issues/30) or future bugs.
-> 2. I will not support future versions of Prettier other than adding test coverage and updating the `peerDependencies` version range to ensure new versions of Prettier do not break this plugin. If they do break it... well, then it's broken.
-> 3. I will continue to review and merge Pull Requests that fix bugs.
-> 4. I will not add any new features, such as support for HTML-like languages or super-languages.
->
-> If you wish to assume ownership of this repository and take over maintenance, please contact me and I will gladly hand it over.
+## Notice of project status
 
-## Using Biome to format HTML
+_Updated on 10 Sep, 2026_
 
-[Biome](https://biomejs.dev) has excellent support for HTML (and [super-languages like Svelte, Astro, and Vue](https://biomejs.dev/internals/language-support/#html-super-languages-support), which has been a popular feature request of this package).
+I am softening the "maintenance mode" status of this project that I have had in place for a while. To be clear, **I am not suddenly going to spend a bunch more time on this project.** Rather, I would like to affectionately dub this plugin "feature complete".
 
-If you want to migrate wholesale from Prettier to Biome, I recommend following [their guide to do that here](https://biomejs.dev/guides/migrate-eslint-prettier/#migrate-from-prettier).
+The goals of this plugin are modest: augment the Prettier formatter so that "self-closing" tag syntax (`/>`) is never emitted in HTML code. If the affected tag is a [void element](https://developer.mozilla.org/en-US/docs/Glossary/Void_element), then this will remove the slash character. If the affected element is not a void element, then its closing tag is inserted. [^1]
 
-If you want to use Biome _only for HTML_ and continue using Prettier for everything else, here is what you need to do:
+[^1]: I have seen some arguments that it should not behave this way since this changes the semantics of the document. I am considering adding a config option for this. If you're interested in this, please create a new issue to let me know.
 
-First, disable Prettier from formatting HTML files by updating your `.prettierignore`:
+To that end, this plugin is functionally complete. I will not add support for other HTML-like languages (Vue has been a common request), nor will I add new features (with the one caveat noted in the footnote). You are welcome to fork this project to add those things if you wish.
 
-```
-*.html
-```
+All that remains for this project is to keep fixing bugs and support new versions of Prettier as they're released. **I intend to do so indefinitely.**
 
-Next, follow the [getting started guide from Biome](https://biomejs.dev/guides/getting-started/) to install it and set up a basic configuration file.
+Contrary to what I have previously said, I will not offer to transfer ownership of this repository to anyone. I will retain ownership [^2], and I will do my best to support it as my availability and energy allows.
 
-Then, update the following [configurations](https://biomejs.dev/reference/configuration) to disable Biome for all but formatting HTML:
+[^2]: I am, however, [considering](https://github.com/awmottaz/prettier-plugin-void-html/issues/51) a migration away from GitHub as my values no longer align with the direction this platform seems to be moving.
 
-- Set `linter.enabled` to `false`
-- Set `assist.enabled` to `false`
-- Set `formatter.enabled` to `false`
-- Set `html.formatter.enabled` to `true`
+I have been lucky to receive some high-quality contributions from strangers, whether that's giving detailed bug reports, fixing those bugs, or adding test coverage when new versions of Prettier are released. I am very thankful to those people! And please, keep them coming. This is what open source is all about, and your contributions help the thousands of projects (🤯) that download this plugin each month. Again, thank you.
 
-<details><summary>Your configuration might look like this</summary>
-
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "files": {
-    "ignoreUnknown": false
-  },
-  "formatter": {
-    "enabled": false
-  },
-  "linter": {
-    "enabled": false
-  },
-  "assist": {
-    "enabled": false
-  },
-  "html": {
-    "formatter": {
-      "enabled": true
-    }
-  }
-}
-```
-
-</details>
-
-This is the minimum to get HTML file formatted with Biome. But you may be interested in enabling more features from Biome such as linting and the "assist" features — please refer to their docs for more details.
-
-As of right now, Biome does not support Markdown. So if you're relying on Prettier to format HTML snippets within Markdown files, then Biome will not help. Sorry about that.
+_— 🫶 Tony_
 
 ## Package summary
 
 This is a [Prettier plugin](https://prettier.io/docs/en/plugins) to format [void HTML elements](https://developer.mozilla.org/en-US/docs/Glossary/Void_element) using the void tag syntax instead of self-closing syntax. Additionally, if self-closing syntax is used on non-void elements, then they will be "unwrapped" so that both the opening and closing tags are present.
 
-## Usage
+## Installation
 
-> [!WARNING]
->
-> See the notice above. I highly recommend _not_ adding this plugin to a new project and using Biome instead.
+This package is hosted on [NPM](https://www.npmjs.com/package/@awmottaz/prettier-plugin-void-html). Install with your package manager of choice. [NPMX](https://npmx.dev/package/@awmottaz/prettier-plugin-void-html) seems to provide instructions for a lot of them.
 
-Install this package from NPM using your favorite package manager:
+This package is usually installed as a dev dependency. It assumes a Node.js runtime, and as a plugin for Prettier it assumes that you have a supported version of `prettier` already installed.
 
-- [`npm`](https://docs.npmjs.com/cli/v10/configuring-npm/install)
-  ```sh
-  npm install -D @awmottaz/prettier-plugin-void-html
-  ```
-- [`yarn`](https://yarnpkg.com/getting-started/install)
-  ```sh
-  yarn add -D @awmottaz/prettier-plugin-void-html
-  ```
-- [`pnpm`](https://pnpm.io/installation)
-  ```sh
-  pnpm add -D @awmottaz/prettier-plugin-void-html
-  ```
+```sh
+npm install -D @awmottaz/prettier-plugin-void-html
+```
 
-Add the plugin to your [Prettier config file](https://prettier.io/docs/en/configuration).
+Next, add the plugin to your [Prettier config file](https://prettier.io/docs/en/configuration).
 
 ```json
 {
@@ -106,23 +44,28 @@ Add the plugin to your [Prettier config file](https://prettier.io/docs/en/config
 }
 ```
 
-Then your HTML should format like so:
+## What this plugin does
+
+With the plugin installed and active, Prettier will format your HTML source code with the following augmentations to Prettier's default formatting:
+
+- Void elements are printed using a plain `>` symbol to close the tag
+- Non-void elements, if authored with a self-closing tag `/>`, will be "unwrapped" so that the closing tag is explicitly included.
 
 <!-- prettier-ignore-start -->
 ```html
-<!-- source -->
+<!-- original source -->
 <meta charset="UTF-8">
 <label for="my-input">Type something</label>
 <input id="my-input" type="text" name="my-input">
 <div />
 
-<!-- Prettier default formatting -->
+<!-- Prettier's default formatting without this plugin -->
 <meta charset="UTF-8" />
 <label for="my-input">Type something</label>
 <input id="my-input" type="text" name="my-input" />
 <div />
 
-<!-- Prettier + this plugin -->
+<!-- Prettier's formatting with this plugin -->
 <meta charset="UTF-8">
 <label for="my-input">Type something</label>
 <input id="my-input" type="text" name="my-input">
@@ -158,13 +101,17 @@ If you do this, please consider [contributing to prettier-plugin-void-html](./CO
 
 ### Languages
 
-This project currently supports HTML, only. Support for other languages such as Svelte or Vue requires using an entirely different parser and is currently outside the scope of this plugin.
+This plugin supports the HTML language, only (the `"html"` [parser](https://prettier.io/docs/options#parser)).
+
+Support for other languages such as Svelte or Vue requires using an entirely different parser and is outside the scope of this plugin.
 
 If you want the features provided by this package in another language, I recommend submitting feedback to the other projects that handle formatting those languages.
 
 ### Void elements
 
 https://developer.mozilla.org/en-US/docs/Glossary/Void_element
+
+The following elements are recognized by this plugin as void elements:
 
 - `area`
 - `base`
