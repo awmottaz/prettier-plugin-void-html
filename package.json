@@ -34,7 +34,7 @@
   "exports": "./prettier-plugin-void-html.js",
   "scripts": {
     "lint": "prettier . --check && eslint .",
-    "test": "tsc && node --test test.js",
+    "test": "tsc && node --test test.js .github/scripts/update-prettier.test.mjs",
     "test:watch": "node --test --watch test.js",
     "release-test": "npm run lint && npm run test"
   },

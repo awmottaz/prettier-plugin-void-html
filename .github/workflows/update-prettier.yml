@@ -1,0 +1,61 @@
+name: Update Prettier compatibility
+
+on:
+  schedule:
+    - cron: "23 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-prettier
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          check-latest: true
+          package-manager-cache: false
+      - name: Add released Prettier versions
+        run: node .github/scripts/update-prettier.mjs
+      - name: Check for changes
+        id: changes
+        run: |
+          if ! git diff --quiet -- package.json test.js; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install dependencies
+        if: steps.changes.outputs.changed == 'true'
+        run: npm install
+      - name: Verify compatibility
+        if: steps.changes.outputs.changed == 'true'
+        run: npm run release-test
+      - name: Create or update pull request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: automation/update-prettier
+          delete-branch: true
+          add-paths: |
+            package.json
+            test.js
+          commit-message: "feat: add support for new Prettier versions"
+          title: "feat: add support for new Prettier versions"
+          body: |
+            Add stable Prettier releases within the currently supported major version.
+
+            - Preserve existing version aliases and add missing releases.
+            - Update the default formatter, compatibility tests, and peer dependency range.
+            - Run `npm run release-test` before opening or updating this PR.
+
+            New major versions require a separate compatibility review.
